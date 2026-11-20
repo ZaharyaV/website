@@ -1,0 +1,189 @@
+/* One stylesheet for the whole site, inspired by AO3
+   COLOURS: change them here and every page follows.
+   Each name (like --header) is a "variable" used further down. */
+
+:root {
+  --header: #047857;      /* emerald header band */
+  --header-dark: #064e3b; /* deeper emerald: menu bar and footer */
+  --header-text: #ffffff; /* text on the header, menu and footer */
+  --page: #ffffff;        /* page background */
+  --ink: #1f2a25;         /* normal text */
+  --muted: #52615a;       /* quieter text (topic line, stats) */
+  --link: #047857;
+  --visited: #3f7d20;     /* links you've already clicked */
+  --hover: #059669;       /* links under the mouse */
+  --box-edge: #b9cfc4;
+  --box-fill: #f0faf5;
+  --rule: #d6e4dc;        /* line under headings */
+}
+
+/* DARK MODE colours. They're written out twice on purpose:
+   1. the @media block is for readers whose device is set to dark
+      (unless they pressed the button to pick light), and
+   2. the [data-theme="dark"] block is for readers who pressed the button.
+   If you change a dark colour, change it in BOTH places. */
+:root { color-scheme: light; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --header: #065f46;
+    --header-dark: #022c22;
+    --header-text: #ecfdf5;
+    --page: #0f1a16;
+    --ink: #e3efe9;
+    --muted: #a3b8ae;
+    --link: #34d399;
+    --visited: #86efac;
+    --hover: #a7f3d0;
+    --box-edge: #34493f;
+    --box-fill: #16251f;
+    --rule: #2a3b33;
+    color-scheme: dark; /* makes scrollbars and form bits dark too */
+  }
+}
+:root[data-theme="dark"] {
+  --header: #065f46;
+  --header-dark: #022c22;
+  --header-text: #ecfdf5;
+  --page: #0f1a16;
+  --ink: #e3efe9;
+  --muted: #a3b8ae;
+  --link: #34d399;
+  --visited: #86efac;
+  --hover: #a7f3d0;
+  --box-edge: #34493f;
+  --box-fill: #16251f;
+  --rule: #2a3b33;
+  color-scheme: dark;
+}
+
+/* THE WHOLE PAGE.
+   display:flex + flex-direction:column + min-height:100vh stacks
+   header / menu / main / footer down the page and makes it at least as
+   tall as the window. main then stretches (see "flex: 1" below), which
+   pushes the footer to the bottom even on short pages: a "sticky footer". */
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a { color: var(--link); }
+a:visited { color: var(--visited); }
+a:hover, a:focus { color: var(--hover); }
+
+/* HEADER BAND */
+header {
+  position: relative; /* lets the dark mode button sit in its corner */
+  background: var(--header);
+  color: var(--header-text);
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--header-dark);
+}
+header h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: normal;
+  font-size: 2em;
+}
+header h1 a, header h1 a:visited { color: var(--header-text); text-decoration: none; }
+header p { margin: 2px 0 0; font-size: 0.9em; opacity: 0.85; }
+
+/* LIGHT / DARK BUTTON (theme.js adds it to the header) */
+.theme-toggle {
+  position: absolute; /* top-right corner of the header */
+  top: 14px;
+  right: 16px;
+  font: inherit;
+  font-size: 0.8em;
+  padding: 4px 10px;
+  color: var(--header-text);
+  background: transparent;
+  border: 1px solid var(--header-text);
+  border-radius: 3px;
+  cursor: pointer;
+}
+.theme-toggle:hover, .theme-toggle:focus-visible { background: var(--header-dark); }
+
+/* MENU BAR: the list sits in a row (flex) and wraps on small screens. */
+nav {
+  background: var(--header-dark);
+  padding: 0 12px;
+}
+nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; }
+nav a, nav a:visited {
+  display: block;
+  padding: 8px 12px;
+  color: var(--header-text);
+  text-decoration: none;
+  font-size: 0.95em;
+}
+nav a:hover, nav a:focus { background: var(--header); color: var(--header-text); }
+
+/* MAIN CONTENT: centred, never wider than 900px so lines stay readable. */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 16px 32px;
+  flex: 1;           /* stretch to fill the window: this is what pushes the footer down */
+  width: 100%;       /* in a flex column, auto margins would shrink main, so keep it full width */
+  box-sizing: border-box; /* count the padding inside that 100% */
+}
+
+h2, h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: normal;
+}
+h2 { font-size: 1.6em; border-bottom: 1px solid var(--rule); padding-bottom: 4px; }
+
+/* PLAIN BOX */
+.box {
+  border: 1px solid var(--box-edge);
+  background: var(--box-fill);
+  padding: 10px 14px;
+  margin: 14px 0;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+/* BLURB: one tutorial listing */
+.blurb {
+  border: 1px solid var(--box-edge);
+  padding: 10px 14px;
+  margin: 0 0 14px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+}
+.blurb h3 { margin: 0; font-size: 1.15em; }
+.blurb .topic { margin: 0 0 6px; color: var(--muted); font-size: 0.9em; }
+.blurb .summary { margin: 8px 0 8px 1.5em; }
+.stats { font-size: 0.85em; color: var(--muted); margin: 0; }
+
+/* Tags in a row, with a comma after every tag except the last.
+   The comma sits on the END of a tag so it never starts a new line by itself. */
+.tags { list-style: none; padding: 0; margin: 6px 0; font-size: 0.9em; display: flex; flex-wrap: wrap; }
+.tags li:not(:last-child)::after { content: ","; margin-right: 0.3em; }
+
+/* Pictures never spill off the side of the page. */
+img, video { max-width: 100%; height: auto; }
+
+/* FOOTER */
+footer {
+  background: var(--header-dark);
+  color: var(--header-text);
+  text-align: center;
+  font-size: 0.8em;
+  padding: 14px;
+}
+footer a, footer a:visited { color: var(--header-text); }
+
+/* PHONES: small tweaks when the screen is 600px wide or less. */
+@media (max-width: 600px) {
+  header { padding: 12px 16px; padding-right: 130px; } /* room for the button */
+  header h1 { font-size: 1.6em; }
+  .theme-toggle { top: 12px; right: 12px; }
+  nav a { padding: 8px 9px; }
+}
