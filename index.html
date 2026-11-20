@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Tells the browser which letters/emoji set to use. Always first. -->
+  <meta charset="utf-8">
+  <!-- Makes the page fit phone screens instead of showing a tiny desktop page. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The text on the browser tab. -->
+  <title>Home | My Scrivener Tutorials</title>
+  <!-- All the looks (colours, layout) live in style.css. -->
+  <link rel="stylesheet" href="style.css">
+  <!-- The light/dark mode button. Loaded up here so dark mode switches on
+       before the page appears (no white flash). -->
+  <script src="theme.js"></script>
+</head>
+<body>
+
+<!-- HEADER BAND: the big coloured strip at the top with the site name.
+     theme.js adds the light/dark button to it automatically. -->
+<header>
+  <h1><a href="index.html">My Scrivener Tutorials</a></h1>
+  <p>Step-by-step guides to writing in Scrivener, free to use.</p>
+</header>
+
+<!-- MENU BAR: one <li> per page. Copy this whole <nav> onto every page
+     so the menu is the same everywhere. Pages you haven't made yet will
+     just show "404" until you make them. -->
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="tutorials.html">Tutorials</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+<!-- MAIN: everything that changes from page to page goes in here. -->
+<main>
+  <h2>Welcome!</h2>
+  <p>Hi! This is where I keep my Scrivener tutorials. Each one walks you through one part of Scrivener step by step, and everything here is free to use.</p>
+
+  <!-- A plain BOX, good for news or notes. -->
+  <h2>What's new</h2>
+  <div class="box">
+    <!-- Add the newest thing at the top. Keep a handful, then trim. -->
+    <p><b>2026-11-20</b> &mdash; The site is born! First tutorial coming soon.</p>
+  </div>
+
+  <!-- TUTORIAL BLURBS: one per tutorial, like a search result on a fic archive.
+       Copy the whole <div class="blurb"> ... </div> for each new tutorial,
+       newest first. -->
+  <h2>Latest tutorials</h2>
+  <div class="blurb">
+    <h3><a href="tutorial-one.html">Tutorial Title</a> by Your Name</h3>
+    <!-- What it's about and who it's for. -->
+    <p class="topic">Scrivener 3 &middot; Mac &amp; Windows &middot; Beginner friendly</p>
+    <!-- Tags: one <li> each, for what the tutorial covers.
+         The commas between them are added by style.css. -->
+    <ul class="tags">
+      <li>The Binder</li>
+      <li>Corkboard</li>
+      <li>Compiling</li>
+    </ul>
+    <blockquote class="summary">One or two sentences on what you'll be able to do in Scrivener by the end.</blockquote>
+    <p class="stats">Parts: 1 &middot; Last updated: 2026-11-20</p>
+  </div>
+</main>
+
+<!-- FOOTER: the strip at the bottom. style.css keeps it at the bottom of
+     the window even on short pages. -->
+<footer>
+  Made by hand in HTML &amp; CSS.
+</footer>
+
+</body>
+</html>
+index.html
+3 KB
